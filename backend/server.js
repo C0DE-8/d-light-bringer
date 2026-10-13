@@ -34,6 +34,32 @@ app.get("/", (req, res) => {
   res.json({ ok: true, service: SERVICE_NAME });
 });
 
+app.get(["/router-test", "/api/router-test"], (req, res) => {
+  res.json({
+    ok: true,
+    service: SERVICE_NAME,
+    routes: [
+      { method: "ALL", path: "/api/referrals/*" },
+      { method: "ALL", path: "/admin/*" },
+      { method: "ALL", path: "/api/admin/*" },
+      { method: "ALL", path: "/telegram/*" },
+      { method: "ALL", path: "/api/telegram/*" },
+      { method: "ALL", path: "/words/*" },
+      { method: "ALL", path: "/api/words/*" },
+      { method: "ALL", path: "/api/visitors/*" },
+      { method: "ALL", path: "/alerts/*" },
+      { method: "ALL", path: "/api/alerts/*" },
+      { method: "GET", path: "/" },
+      { method: "GET", path: "/router-test" },
+      { method: "GET", path: "/api/router-test" },
+      { method: "GET", path: "/health" },
+      { method: "GET", path: "/api/health" },
+      { method: "GET", path: "/db/ping" },
+      { method: "GET", path: "/api/db/ping" },
+    ],
+  });
+});
+
 app.get(["/health", "/api/health"], async (req, res) => {
   try {
     const status = await db.status();

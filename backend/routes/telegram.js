@@ -14,6 +14,11 @@ const {
 
 const router = express.Router();
 
+// GET /api/telegram/ping - Confirm that the Telegram router is mounted
+router.get("/ping", (req, res) => {
+  res.json({ ok: true, router: "telegram", message: "Telegram router is responding." });
+});
+
 function getPasscode(req) {
   return req.body?.passcode || req.query?.passcode || req.header("x-telegram-passcode") || req.header("x-setup-secret");
 }
